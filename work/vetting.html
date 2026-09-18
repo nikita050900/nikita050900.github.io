@@ -8,19 +8,23 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../index.html#work">Work</a>
-    <a href="../index.html#publications">Publications</a>
-    <a href="../cv.html">CV</a>
-  </nav>
+<div class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Nikita Agarwal</a><span class="beta" title="This site is a work in progress">beta</span>
+  <ul>
+    <li><a href="../index.html#demo">Demo</a></li>
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="../industry.html">For industry</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+    <li><a href="../cv.html">CV</a></li>
+  </ul>
+</div></div>
+<div class="article"><div class="wrap">
   <h1>Is the detection real, or is it one bad sensor?</h1>
   <p class="lede">Robustness and false-positive checks for candidates in multi-sensor time series.</p>
   <p class="meta">Two lead-author papers in progress with the NANOGrav collaboration (2026). Numbers below are from work in progress and may change.</p>
-</header>
+</div></div>
 
-<main>
+<main class="wrap">
   <h2>The problem</h2>
   <p>Our array is 68 pulsars observed for 15 years. Each one has its own noise, and one of them, PSR J1713+0747, is known to misbehave: it has a binary orbit at a frequency inside our search band and two documented events where the interstellar medium changed its timing. At high frequencies our standard noise models stop covering the data, and unmodeled noise can look like a signal. The collaboration's all-sky search found its strongest candidate right at that pulsar's orbital frequency and, on inspection, most of the support came from that one pulsar.</p>
   <p>The question I am working on: when a search returns an elevated evidence ratio at some frequency, what set of checks should it pass before anyone calls it a candidate?</p>
@@ -36,6 +40,7 @@
   <p>Replace pulsars with sensors, stores, accounts or instruments and the problem is the same: a model flags something, and the question is whether the flag survives removing the most suspicious input, whether it survives a permutation null, and whether it appears in a way the model says a real effect should. This is the shape of model validation, anomaly triage and false-positive control in any multi-source dataset.</p>
 </main>
 
-<footer>Nikita Agarwal. Last updated September 2026.</footer>
+<footer><div class="wrap"><span>Nikita Agarwal, September 2026. This site is a beta version and still being built.</span></div></footer>
+<script src="../script.js"></script>
 </body>
 </html>

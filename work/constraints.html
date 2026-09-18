@@ -8,19 +8,23 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../index.html#work">Work</a>
-    <a href="../index.html#publications">Publications</a>
-    <a href="../cv.html">CV</a>
-  </nav>
+<div class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Nikita Agarwal</a><span class="beta" title="This site is a work in progress">beta</span>
+  <ul>
+    <li><a href="../index.html#demo">Demo</a></li>
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="../industry.html">For industry</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+    <li><a href="../cv.html">CV</a></li>
+  </ul>
+</div></div>
+<div class="article"><div class="wrap">
   <h1>Applying a constraint after sampling instead of before</h1>
   <p class="lede">A post-processing method for constrained searches, and why it is exactly importance reweighting.</p>
   <p class="meta">Developed for the NANOGrav 15-year targeted search (ApJ Letters, 2026) and documented in the benchmarking manuscript (in preparation).</p>
-</header>
+</div></div>
 
-<main>
+<main class="wrap">
   <h2>The problem</h2>
   <p>A targeted search asks whether a specific galaxy hosts a signal. We know the galaxy's position and distance from telescope observations, so those should be fixed rather than searched over. The fast sampler we wanted to use does not have distance as a parameter at all: it samples the signal amplitude, and distance only enters through a known relation between amplitude, mass and frequency. Modifying the sampler's core was not an option on the timescale of the collaboration paper.</p>
 
@@ -40,6 +44,7 @@
   <p>This is the general situation where you have expensive posterior samples and a constraint you did not (or could not) build into the model. Rejection by an indicator, reweighting by a smooth window, and posterior binning are all one idea. Knowing that lets you reuse existing chains under new assumptions, and knowing the effective sample size cost lets you say when you should not.</p>
 </main>
 
-<footer>Nikita Agarwal. Last updated September 2026.</footer>
+<footer><div class="wrap"><span>Nikita Agarwal, September 2026. This site is a beta version and still being built.</span></div></footer>
+<script src="../script.js"></script>
 </body>
 </html>

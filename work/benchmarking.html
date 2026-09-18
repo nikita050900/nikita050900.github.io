@@ -8,19 +8,23 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../index.html#work">Work</a>
-    <a href="../index.html#publications">Publications</a>
-    <a href="../cv.html">CV</a>
-  </nav>
+<div class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Nikita Agarwal</a><span class="beta" title="This site is a work in progress">beta</span>
+  <ul>
+    <li><a href="../index.html#demo">Demo</a></li>
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="../industry.html">For industry</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+    <li><a href="../cv.html">CV</a></li>
+  </ul>
+</div></div>
+<div class="article"><div class="wrap">
   <h1>When a 500x faster sampler is only a few times faster</h1>
   <p class="lede">Validation and benchmarking of three inference pipelines on the same problem.</p>
   <p class="meta">Lead author, manuscript in preparation (2026), with B. Larsen, L. Dey, S. Burke-Spolaor, B. Bécsy, W. Fiore and C. A. Witt.</p>
-</header>
+</div></div>
 
-<main>
+<main class="wrap">
   <h2>The problem</h2>
   <p>Our searches fit a signal model with a few dozen to a few hundred parameters to 15 years of noisy time series from 68 pulsars, using MCMC. The standard framework is general-purpose and slow. A newer sampler reformulates the likelihood so that the expensive part of the computation is reused across many proposals, and runs orders of magnitude faster per step. A third pipeline extends that fast sampler to handle the constrained (targeted) case directly.</p>
   <p>Two questions had to be answered before anyone could trust the fast route for constrained searches. Does it give the same answer as the slow one? And how much faster is it really, in terms that matter, which is independent posterior samples per hour rather than iterations per second?</p>
@@ -51,6 +55,7 @@
   <p>Python, NumPy, SciPy, Numba-threaded sampling, MPI for the standard framework, SLURM on a university cluster, HDF5 chain storage. Runs used four cores each; wall times on the order of 10 hours per run.</p>
 </main>
 
-<footer>Nikita Agarwal. Last updated September 2026.</footer>
+<footer><div class="wrap"><span>Nikita Agarwal, September 2026. This site is a beta version and still being built.</span></div></footer>
+<script src="../script.js"></script>
 </body>
 </html>
