@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmarking inference pipelines</title>
+<meta name="description" content="Why a 500x cheaper sampler iteration delivered only a few times more independent samples, and the benchmark protocol that showed it.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#publications">Publications</a>
+    <a href="../cv.html">CV</a>
+  </nav>
+  <h1>When a 500x faster sampler is only a few times faster</h1>
+  <p class="lede">Validation and benchmarking of three inference pipelines on the same problem.</p>
+  <p class="meta">Lead author, manuscript in preparation (2026), with B. Larsen, L. Dey, S. Burke-Spolaor, B. Bécsy, W. Fiore and C. A. Witt.</p>
+</header>
+
+<main>
+  <h2>The problem</h2>
+  <p>Our searches fit a signal model with a few dozen to a few hundred parameters to 15 years of noisy time series from 68 pulsars, using MCMC. The standard framework is general-purpose and slow. A newer sampler reformulates the likelihood so that the expensive part of the computation is reused across many proposals, and runs orders of magnitude faster per step. A third pipeline extends that fast sampler to handle the constrained (targeted) case directly.</p>
+  <p>Two questions had to be answered before anyone could trust the fast route for constrained searches. Does it give the same answer as the slow one? And how much faster is it really, in terms that matter, which is independent posterior samples per hour rather than iterations per second?</p>
+
+  <h2>What I did</h2>
+  <p>I set up 15 runs across the three pipelines on two simulated datasets from a community mock data challenge, one with an injected signal and one without, in matched configurations so that every comparison was like for like. The simulated data have known answers, so recovery can be checked directly.</p>
+  <p>For validation, all three pipelines recovered the injected parameters, all three detected the injected signal, and the six upper limits on the key mass parameter agreed to within 0.05 dex (about 12%) across pipelines and configurations.</p>
+  <p>For the benchmark, I proposed and measured four quantities for every run:</p>
+  <ul>
+    <li><strong>Cost per iteration</strong>: wall clock time divided by sampler iterations.</li>
+    <li><strong>Effective sample size (ESS)</strong>: the number of independent draws the chain is worth, from the integrated autocorrelation time of the slowest-mixing parameter.</li>
+    <li><strong>Throughput</strong>: ESS divided by wall clock time, the rate at which independent samples actually accumulate.</li>
+    <li><strong>Peak memory</strong>: maximum resident set size from the scheduler's accounting.</li>
+  </ul>
+
+  <h2>What came out</h2>
+  <figure>
+    <p>The fast sampler cost about 3.5 × 10<sup>-5</sup> s per iteration against 1.4 to 2.6 × 10<sup>-2</sup> s for the standard framework, a factor of roughly 500 to 750. But its chains were far more autocorrelated, so in matched configurations the rate of independent samples differed by only a factor of a few.</p>
+    <figcaption>The per-iteration number is the one people quote. The throughput number is the one that determines how long you wait for a converged answer.</figcaption>
+  </figure>
+  <p>The standard framework's proposal scheme produces less correlated chains, so each of its expensive iterations carries more information. Memory told a cleaner story: the fast sampler runs all four tempering chains in one process at about 1.2 GB, the standard framework runs one process per chain at about 3 GB total.</p>
+  <p>One more subtlety mattered for the constrained case. The post-processing route I built (described in <a href="constraints.html">the next writeup</a>) discards most stored samples in some configurations, and the survivors arrive in correlated clumps. A naive autocorrelation estimate on the surviving subset hides the gaps between them, so I estimated the masked ESS with a block bootstrap in chain time instead (blocks of 20 autocorrelation times, 300 resamples). In the worst configuration the usable throughput after masking fell roughly 20-fold, to the level of the slow framework. That is the price of keeping the constraint adjustable after the run; the direct-sampling pipeline pays it up front instead and keeps every sample.</p>
+
+  <h2>Why this matters outside astronomy</h2>
+  <p>Any team choosing between inference engines, samplers or optimizers faces the same trap: the headline speed metric is not the one that predicts time to a usable answer. The protocol here is not tied to the physics. Cost per iteration, ESS from integrated autocorrelation time, throughput, and memory can be measured for any MCMC-based pipeline, and the block bootstrap handles the case where post-hoc filtering leaves you with correlated survivors.</p>
+
+  <h2>Tools</h2>
+  <p>Python, NumPy, SciPy, Numba-threaded sampling, MPI for the standard framework, SLURM on a university cluster, HDF5 chain storage. Runs used four cores each; wall times on the order of 10 hours per run.</p>
+</main>
+
+<footer>Nikita Agarwal. Last updated September 2026.</footer>
+</body>
+</html>

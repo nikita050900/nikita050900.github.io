@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vetting detections</title>
+<meta name="description" content="Robustness checks for candidate detections in multi-sensor time series: leave-one-out influence, null tests, and a diagnostic for frequency-dependent posterior support.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#publications">Publications</a>
+    <a href="../cv.html">CV</a>
+  </nav>
+  <h1>Is the detection real, or is it one bad sensor?</h1>
+  <p class="lede">Robustness and false-positive checks for candidates in multi-sensor time series.</p>
+  <p class="meta">Two lead-author papers in progress with the NANOGrav collaboration (2026). Numbers below are from work in progress and may change.</p>
+</header>
+
+<main>
+  <h2>The problem</h2>
+  <p>Our array is 68 pulsars observed for 15 years. Each one has its own noise, and one of them, PSR J1713+0747, is known to misbehave: it has a binary orbit at a frequency inside our search band and two documented events where the interstellar medium changed its timing. At high frequencies our standard noise models stop covering the data, and unmodeled noise can look like a signal. The collaboration's all-sky search found its strongest candidate right at that pulsar's orbital frequency and, on inspection, most of the support came from that one pulsar.</p>
+  <p>The question I am working on: when a search returns an elevated evidence ratio at some frequency, what set of checks should it pass before anyone calls it a candidate?</p>
+
+  <h2>What I am doing</h2>
+  <p><strong>Configuration grid.</strong> Every analysis runs three ways: with the suspect pulsar under the standard noise model, without it, and with it under a custom noise model built for its known behaviour. Results that move a lot between these are treated as noise-driven until shown otherwise. In the frequency-resolved all-sky runs, the evidence ratio in one bin changes from 46 to 178 when the pulsar is removed and in a neighbouring bin drops from 25 to 3, which is exactly the signature of a single-sensor artifact rather than a sky-wide signal.</p>
+  <p><strong>Leave-one-out influence.</strong> A dropout factor per pulsar quantifies how much the apparent signal depends on each one. A real signal should be spread across the array in a way set by geometry; a noise feature traces to one or two pulsars.</p>
+  <p><strong>Null tests.</strong> Sky scrambles, phase shifts and sky shuffles break the geometric correlation a real signal would have while keeping each pulsar's noise intact. They give the distribution of the statistic under "no signal" for these exact data, which is the right reference for a p-value. These tests are validated on simulated data elsewhere, so they cannot be accused of rejecting everything.</p>
+  <p><strong>Modulation index.</strong> A diagnostic I introduced: count posterior samples per sky pixel in each frequency bin, normalise each map, and take the standard deviation over mean of the values across bins. High values mark directions where the sampler's preference changes strongly with frequency. It is a comparative flag for where to look, not a significance statistic, and I check that it converges with map resolution.</p>
+  <p><strong>Prior construction from conflicting sources.</strong> For two nearby target galaxies, the redshift-based distance is unreliable, so I compiled every published redshift-independent distance measurement, deduplicated them by underlying dataset, and set lognormal priors. For one galaxy the measurements split into two groups that disagree beyond their stated errors; I placed the prior between them, wide enough that neither group is strongly disfavoured, rather than picking a side.</p>
+
+  <h2>Why this matters outside astronomy</h2>
+  <p>Replace pulsars with sensors, stores, accounts or instruments and the problem is the same: a model flags something, and the question is whether the flag survives removing the most suspicious input, whether it survives a permutation null, and whether it appears in a way the model says a real effect should. This is the shape of model validation, anomaly triage and false-positive control in any multi-source dataset.</p>
+</main>
+
+<footer>Nikita Agarwal. Last updated September 2026.</footer>
+</body>
+</html>

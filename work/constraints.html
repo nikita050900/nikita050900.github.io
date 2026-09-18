@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Constraints after sampling</title>
+<meta name="description" content="Applying a hard constraint to stored MCMC samples after the run, shown to be importance reweighting, with the prior correction that keeps the estimator stable.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#publications">Publications</a>
+    <a href="../cv.html">CV</a>
+  </nav>
+  <h1>Applying a constraint after sampling instead of before</h1>
+  <p class="lede">A post-processing method for constrained searches, and why it is exactly importance reweighting.</p>
+  <p class="meta">Developed for the NANOGrav 15-year targeted search (ApJ Letters, 2026) and documented in the benchmarking manuscript (in preparation).</p>
+</header>
+
+<main>
+  <h2>The problem</h2>
+  <p>A targeted search asks whether a specific galaxy hosts a signal. We know the galaxy's position and distance from telescope observations, so those should be fixed rather than searched over. The fast sampler we wanted to use does not have distance as a parameter at all: it samples the signal amplitude, and distance only enters through a known relation between amplitude, mass and frequency. Modifying the sampler's core was not an option on the timescale of the collaboration paper.</p>
+
+  <h2>What I did</h2>
+  <p>Instead of changing the sampler, I changed what happens to its output. Every stored sample implies a distance through the amplitude relation. I keep the samples whose implied distance lies within a tolerance of the known value and discard the rest.</p>
+  <p>The important step was showing what this does statistically. Discarding samples with a binary window function is importance reweighting with weights of 0 or 1, which means the surviving samples are draws from the posterior under a modified prior that includes the distance constraint. It is unbiased provided the original chain sampled the retained region adequately. The cost is a smaller effective sample size, not a biased answer, and the tolerance can be changed afterwards without rerunning anything. One stored chain gives the constraint at every tolerance.</p>
+  <p>The mask had a side effect on the detection statistic. Our evidence ratio is computed from the posterior density at zero signal amplitude, and at a fixed distance a tiny amplitude requires a tiny mass. If the mass prior extends below the region the mask keeps, the sampler wastes time there, the lowest amplitude bins empty out after masking, and the estimator becomes unstable. So I derived the minimum mass allowed by the constraint from the amplitude relation and used it as the prior floor. That keeps the low-amplitude bins populated and the evidence estimate finite in the no-signal case. I checked that the floor carries no runtime penalty.</p>
+
+  <h2>What came out</h2>
+  <figure>
+    <p>On simulated data with a known injected signal, masking collapsed the mass posterior onto the true value and tightened the frequency and amplitude posteriors. On the no-signal dataset the evidence ratios stayed finite and below one, correctly indicating no detection. Sweeping the tolerance from below 1% to several percent moved the final upper limit by a few hundredths of a dex; the tolerance mainly sets how many samples survive, not the answer.</p>
+    <figcaption>The direct-sampling pipeline, which imposes the constraint before the run, gave the same limits. The two routes differ in cost and flexibility, not in accuracy.</figcaption>
+  </figure>
+  <p>The same argument covers per-frequency-bin limits: binning samples by frequency is the same operation with a different indicator function, so a single broad run yields limits at every frequency without a dedicated run per bin, as long as each bin keeps enough samples.</p>
+
+  <h2>Why this matters outside astronomy</h2>
+  <p>This is the general situation where you have expensive posterior samples and a constraint you did not (or could not) build into the model. Rejection by an indicator, reweighting by a smooth window, and posterior binning are all one idea. Knowing that lets you reuse existing chains under new assumptions, and knowing the effective sample size cost lets you say when you should not.</p>
+</main>
+
+<footer>Nikita Agarwal. Last updated September 2026.</footer>
+</body>
+</html>
