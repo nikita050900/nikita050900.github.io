@@ -32,7 +32,7 @@ p { margin: 0 0 16px; }
 /* nav */
 .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; height: 56px; }
-.nav ul { margin-left: auto; }
+.nav .wrap ul { margin-left: auto; }
 .nav .brand { font-family: var(--serif); font-size: 18px; color: var(--fg); text-decoration: none; }
 .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 22px; }
 .nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
