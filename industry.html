@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why this transfers · Nikita Agarwal</title>
+<meta name="description" content="What a PhD in weak-signal detection with pulsar timing arrays looks like when translated into quantitative research, model validation and data science work.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav"><div class="wrap">
+  <a class="brand" href="index.html">Nikita Agarwal</a>
+  <ul>
+    <li><a href="index.html#demo">Demo</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="industry.html" aria-current="page">For industry</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+</div></div>
+
+<div class="article"><div class="wrap">
+  <h1>Why this transfers</h1>
+  <p class="lede">Pulsar timing is an unusual domain. The statistics underneath it are not. Here is the PhD, line by line, in the vocabulary of the teams I want to join. Click any row for the specifics.</p>
+</div></div>
+
+<main class="wrap">
+  <p class="callout">The whole field is one problem: a signal far below the noise of any single detector, correlated noise that imitates it, and a decision about whether the evidence is real. That is also fraud detection, model risk, A/B testing at low effect sizes, and anomaly detection in sensor networks.</p>
+
+  <div class="split">
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Searched for one faint periodic signal across 68 pulsars over 15 years</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Weak-signal detection in multi-source time series</h3></div>
+      <p class="more">Each pulsar is a noisy channel with its own noise model. The signal is only visible when all channels are modeled jointly and their noise is separated from the common signal. The same structure appears in multi-sensor monitoring, portfolio-level risk, and anomaly detection where no single stream is conclusive.</p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Ran Bayesian inference over 10<sup>9</sup> samples per search with parallel-tempered MCMC on HPC clusters</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Probabilistic modeling and uncertainty quantification at scale</h3></div>
+      <p class="more">Posterior distributions rather than point estimates, hierarchical noise models, priors built from external evidence, and honest intervals on everything. Sampler tuning, convergence diagnostics (integrated autocorrelation time, effective sample size) and memory-aware pipelines on SLURM systems.</p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Designed the validation and benchmarking protocol for three competing inference pipelines</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Model validation and benchmarking</h3></div>
+      <p class="more">Defined the metrics (cost per iteration, effective sample size, throughput of usable samples, peak memory), ran the same simulated problem through each pipeline, and showed that a 500x per-iteration speedup collapses to a factor of a few in independent samples once autocorrelation is accounted for. Results agreed within 0.05 dex. This is the CQG paper. <a href="work/benchmarking.html">Read the write-up.</a></p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Applied a physical constraint after sampling and proved it was importance reweighting</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Reusing expensive model runs instead of re-running them</h3></div>
+      <p class="more">Stored samples were reweighted to a new prior in seconds instead of days, with a derived prior floor that keeps the estimator stable and a block bootstrap for uncertainty on correlated samples. The same idea lets a team update a fitted model under a new constraint or scenario without paying the full compute cost again. <a href="work/constraints.html">Read the write-up.</a></p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Vetted candidate detections: leave-one-pulsar-out, sky scrambles, phase shifts</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>False-positive control, influence analysis, permutation tests</h3></div>
+      <p class="more">Before a claim goes out, it has to survive removing the most influential data source, and it has to vanish when the data are scrambled in ways that destroy the real correlation but preserve the noise. This is the discipline behind robust A/B decisions and model-risk sign-off. <a href="work/vetting.html">Read the write-up.</a></p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Built priors from conflicting external measurements for the NGC 3115 and NGC 1316 searches</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Data reconciliation and robust prior construction</h3></div>
+      <p class="more">Compiled every independent distance measurement, deduplicated by underlying dataset, handled two groups of measurements that disagreed, and tested how the result moved under each choice. Same workflow as reconciling vendor data feeds or conflicting ground-truth labels.</p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Trained a neural surrogate for an expensive analytic model</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Applied ML for simulation acceleration</h3></div>
+      <p class="more">A PyTorch MLP (~301K parameters) emulating a gravitational waveform model with ~1.2% median mismatch and a 14x batched speedup. Small, but end to end: data generation, training, error analysis, and an honest account of where it fails. <a href="https://github.com/nikita050900/gw-surrogate">Code on GitHub.</a></p>
+      <span class="hint">click for details</span>
+    </div>
+
+    <div class="row">
+      <div><span class="side">What I did</span><h3>Delivered analyses inside a large scientific collaboration; technology consulting internship at KPMG</h3></div>
+      <div><span class="side ind">What it is called elsewhere</span><h3>Cross-functional delivery and reviewed, reproducible work</h3></div>
+      <p class="more">Collaboration papers go through internal review before submission, so every number is reproducible and every choice is documented. Earlier, a technology consulting internship at KPMG building a risk-scoring algorithm for a third-party risk management platform, which is where the habit of defensible numbers started.</p>
+      <span class="hint">click for details</span>
+    </div>
+  </div>
+
+  <h2 style="margin-top:56px">Where I fit</h2>
+  <p class="muted">Full-time from summer 2027, anywhere in the US. Roles where the statistics carry the decision.</p>
+  <div class="roles">
+    <div class="role-card"><h3>Quantitative research</h3><p>Low signal-to-noise inference, correlated noise, and a culture of testing whether a result survives the data being resampled. The daily work already looks like this.</p></div>
+    <div class="role-card"><h3>Model validation and model risk</h3><p>Benchmarking competing models, checking convergence and stability, influence analysis, and writing up what a model can and cannot support. See the CQG paper.</p></div>
+    <div class="role-card"><h3>Statistical and data science</h3><p>Bayesian A/B analysis, uncertainty quantification, experiment design with small effect sizes, and translating results for non-specialists.</p></div>
+    <div class="role-card"><h3>Scientific computing and ML research</h3><p>Large sampling workloads on HPC, memory-aware pipelines, surrogate models, and profiling what actually limits throughput.</p></div>
+  </div>
+
+  <h2 style="margin-top:56px">What I am not claiming</h2>
+  <p class="muted" style="max-width:62ch">I have not shipped production ML systems or worked with SQL warehouses day to day. I know SQL and I learn tooling fast, but the strength here is statistical judgment and getting correct answers out of hard data, not platform engineering.</p>
+
+  <p style="margin-top:40px"><a class="btn primary" href="mailto:nikita.agarwal2503@gmail.com">Email me</a> &nbsp; <a class="btn" href="cv.html">Full CV</a></p>
+</main>
+
+<footer><div class="wrap"><span>Nikita Agarwal, September 2026.</span><span><a href="publications.html">Publications</a> · <a href="cv.html">CV</a></span></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

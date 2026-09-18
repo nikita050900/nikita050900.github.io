@@ -4,74 +4,128 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nikita Agarwal</title>
-<meta name="description" content="Nikita Agarwal. Physics PhD candidate working on Bayesian inference and signal detection at scale. Looking for quantitative research, model validation, statistical science and scientific computing roles starting 2027.">
+<meta name="description" content="Nikita Agarwal finds weak signals in noisy data. Physics PhD candidate working on Bayesian inference at scale; looking for quantitative research, model validation, statistical science and scientific computing roles from 2027.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="index.html#work">Work</a>
-    <a href="index.html#publications">Publications</a>
-    <a href="cv.html">CV</a>
-  </nav>
-  <h1>Nikita Agarwal</h1>
-  <p class="lede">I find weak signals in noisy data.</p>
+
+<div class="nav"><div class="wrap">
+  <a class="brand" href="index.html">Nikita Agarwal</a>
+  <ul>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="industry.html">For industry</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+</div></div>
+
+<header class="hero">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Physics PhD candidate · NANOGrav · finishing 2027</div>
+      <h1>I find weak signals in noisy data.</h1>
+      <p class="tag">Bayesian inference at scale, model validation, and the checks that separate a real detection from a bad sensor.</p>
+      <div class="cta">
+        <a class="btn primary" href="#demo">Try the 60-second demo</a>
+        <a class="btn" href="industry.html">Why this transfers</a>
+      </div>
+    </div>
+    <img class="portrait" src="photo.jpg" alt="Nikita Agarwal" onerror="this.hidden=true">
+  </div>
 </header>
 
-<main>
-  <p>I am a Physics PhD candidate at West Virginia University, finishing in August 2027. My research uses 15 years of timing data from 68 pulsars to search for a periodic signal from pairs of supermassive black holes. In practice that means large-scale Bayesian inference: MCMC on billions of samples, model comparison across competing noise assumptions, and building the checks that decide whether an apparent detection is real or an artifact of one bad sensor.</p>
-  <p>I am looking for full-time roles starting 2027 in quantitative research, model risk and validation, statistical science, or scientific computing, anywhere in the US.</p>
-
-  <dl class="kv">
-    <dt>Email</dt><dd><a href="mailto:nikita.agarwal2503@gmail.com">nikita.agarwal2503@gmail.com</a></dd>
-    <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/nikitaagarwal123">linkedin.com/in/nikitaagarwal123</a></dd>
-    <dt>GitHub</dt><dd><a href="https://github.com/nikita050900">github.com/nikita050900</a></dd>
-    <dt>ORCID</dt><dd><a href="https://orcid.org/0000-0001-7544-7876">0000-0001-7544-7876</a></dd>
-  </dl>
-
-  <h2 id="work">Work</h2>
-  <p class="meta">Three problems I have worked on, written for a technical reader who is not an astronomer.</p>
-  <div class="cards">
-    <a class="card" href="work/benchmarking.html">
-      <span class="tag">Validation and benchmarking</span>
-      <h3>When a 500x faster sampler is only a few times faster</h3>
-      <p>Comparing three inference pipelines on cost per iteration, effective sample size, throughput and memory, and why the per-iteration number misleads.</p>
-    </a>
-    <a class="card" href="work/constraints.html">
-      <span class="tag">Statistical method</span>
-      <h3>Applying a constraint after sampling instead of before</h3>
-      <p>A post-processing mask on stored MCMC samples, shown to be importance reweighting, with the prior correction that keeps the estimator stable.</p>
-    </a>
-    <a class="card" href="work/vetting.html">
-      <span class="tag">Robustness and false positives</span>
-      <h3>Is the detection real, or is it one bad sensor?</h3>
-      <p>Leave-one-out influence, null tests, and a diagnostic for how posterior support moves with frequency, applied to candidates that look too good.</p>
-    </a>
-    <a class="card" href="https://github.com/nikita050900/gw-surrogate">
-      <span class="tag">Applied ML</span>
-      <h3>Neural surrogate for gravitational waveforms</h3>
-      <p>PyTorch MLP (~301K parameters) emulating an analytic waveform model: ~1.2% median mismatch, 14x batched speedup. Code on GitHub.</p>
-    </a>
+<section id="about">
+  <div class="wrap reveal">
+    <p class="lead">My PhD uses 15 years of timing data from 68 pulsars, some of the most precise clocks in the universe, to search for a faint periodic signal from pairs of supermassive black holes. No single pulsar shows it. The signal only appears when all of them are modeled together, which means the real work is statistical: billions of MCMC samples, competing noise models, and a lot of care about what counts as evidence.</p>
+    <p class="lead">I finish in August 2027 and am looking for full-time roles in quantitative research, model risk and validation, statistical science, or scientific computing, anywhere in the US.</p>
+    <div class="facts">
+      <div class="fact"><b>68</b><span>pulsars modeled jointly</span></div>
+      <div class="fact"><b>15 yr</b><span>of timing data</span></div>
+      <div class="fact"><b>10<sup>9</sup></b><span>MCMC samples per run</span></div>
+      <div class="fact"><b>250+</b><span>citations on 6 refereed papers</span></div>
+    </div>
   </div>
+</section>
 
-  <h2 id="publications">Publications</h2>
-  <p class="meta">Six refereed papers, cited 250+ times (INSPIRE-HEP, September 2026). NANOGrav collaboration papers list authors alphabetically.</p>
-  <ul>
-    <li>NANOGrav Collaboration incl. N. Agarwal, <em>The NANOGrav 15 yr Data Set: Targeted Searches for Supermassive Black Hole Binaries</em>, ApJ Letters 998, L11 (2026). <a href="https://arxiv.org/abs/2508.16534">arXiv:2508.16534</a>. Role: carried out the QuickCW searches and their posterior reweighting; contributed to writing.</li>
-    <li>N. Agarwal, B. Larsen, L. Dey, S. Burke-Spolaor, B. Bécsy, W. Fiore, C. A. Witt, <em>Validation and Benchmarking of Targeted Continuous Wave Search Pipelines for Pulsar Timing Arrays</em>, manuscript in preparation (2026).</li>
-    <li>C. Matt et al. incl. N. Agarwal, <em>Gravitational-wave Measurement of the M<sub>BH</sub>–M<sub>bulge</sub> Intrinsic Scatter at High Redshift</em>, ApJ 1006, 63 (2026).</li>
-    <li>T. T. Moursy et al. incl. N. Agarwal, <em>Pulsar Timing Array Sensitivity to Anisotropy</em>, ApJ 1008, 205 (2026).</li>
-    <li>K. Nobleson, N. Agarwal, R. Girgaonkar et al., <em>Low-frequency wideband timing of InPTA pulsars observed with the uGMRT</em>, MNRAS 512, 1234 (2022).</li>
-    <li>P. Tarafdar et al. incl. N. Agarwal, <em>The Indian Pulsar Timing Array: First data release</em>, PASA 39, e053 (2022).</li>
-    <li>B. C. Joshi et al. incl. N. Agarwal, <em>Nanohertz gravitational wave astronomy during SKA era: An InPTA perspective</em>, J. Astrophys. Astron. 43, 98 (2022).</li>
-    <li>J. Singha et al. incl. N. Agarwal, <em>Evidence for profile changes in PSR J1713+0747 using the uGMRT</em>, MNRAS Letters 507, L57 (2021).</li>
-  </ul>
-  <p class="meta">Full list, talks and service on the <a href="cv.html">CV page</a>.</p>
-</main>
+<section id="demo" class="alt">
+  <div class="wrap reveal">
+    <h2>What the problem feels like</h2>
+    <p class="muted">A toy version of my day job. The dashed curve is the signal we are looking for. The solid trace is what a detector actually records: the signal buried in correlated noise. Drag the slider to change how loud the signal is, then switch from one channel to all 68 combined.</p>
+    <div class="demo">
+      <div class="panel"><canvas id="demoCanvas"></canvas></div>
+      <div class="panel">
+        <label for="amp">Signal strength (relative to noise)</label>
+        <input id="amp" type="range" min="0" max="120" value="25">
+        <label>Channels</label>
+        <div class="seg">
+          <button type="button" data-mode="one" class="on">1 pulsar</button>
+          <button type="button" data-mode="all">68 pulsars</button>
+        </div>
+        <label>Detection statistic</label>
+        <div class="stat"><span id="snr">0.0σ</span><small id="verdict">consistent with noise</small></div>
+        <p class="small muted" style="margin-top:14px">Combining channels grows the statistic roughly as √N when the noise is independent. In real data it is not independent, which is where the interesting statistics start.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<footer>
-  Nikita Agarwal. Last updated September 2026.
-</footer>
+<section id="work">
+  <div class="wrap reveal">
+    <h2>Three problems, written for a technical reader who is not an astronomer</h2>
+    <div class="grid">
+      <a class="card" href="work/benchmarking.html">
+        <span class="num">01</span>
+        <div class="kicker">Validation and benchmarking</div>
+        <h3>When a 500x faster sampler is only a few times faster</h3>
+        <p>Three inference pipelines, one problem. Cost per iteration, effective sample size, throughput and memory, and why the headline number misleads.</p>
+      </a>
+      <a class="card" href="work/constraints.html">
+        <span class="num">02</span>
+        <div class="kicker">Statistical method</div>
+        <h3>Applying a constraint after sampling instead of before</h3>
+        <p>A post-processing mask on stored MCMC samples, shown to be importance reweighting, plus the prior correction that keeps the estimator stable.</p>
+      </a>
+      <a class="card" href="work/vetting.html">
+        <span class="num">03</span>
+        <div class="kicker">Robustness and false positives</div>
+        <h3>Is the detection real, or is it one bad sensor?</h3>
+        <p>Leave-one-out influence, permutation-style null tests, and a diagnostic for how posterior support moves with frequency.</p>
+      </a>
+      <a class="card" href="https://github.com/nikita050900/gw-surrogate">
+        <span class="num">04</span>
+        <div class="kicker">Applied ML, code on GitHub</div>
+        <h3>A neural surrogate for gravitational waveforms</h3>
+        <p>PyTorch MLP (~301K parameters) emulating an analytic waveform model: ~1.2% median mismatch, 14x batched speedup.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="toolbox" class="alt">
+  <div class="wrap reveal">
+    <h2>Toolbox</h2>
+    <p class="muted">What I reach for, in the order I reach for it.</p>
+    <div class="chips">
+      <span class="chip">Bayesian inference</span><span class="chip">MCMC, parallel tempering</span><span class="chip">Importance reweighting</span><span class="chip">Model comparison</span><span class="chip">Effective sample size</span><span class="chip">Bootstrap</span><span class="chip">Python</span><span class="chip">NumPy, SciPy</span><span class="chip">pandas</span><span class="chip">PyTorch</span><span class="chip">SLURM, MPI</span><span class="chip">HDF5</span><span class="chip">Git</span><span class="chip">LaTeX</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap reveal">
+    <h2>Contact</h2>
+    <dl class="kv">
+      <dt>Email</dt><dd><a href="mailto:nikita.agarwal2503@gmail.com">nikita.agarwal2503@gmail.com</a></dd>
+      <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/nikitaagarwal123">linkedin.com/in/nikitaagarwal123</a></dd>
+      <dt>GitHub</dt><dd><a href="https://github.com/nikita050900">github.com/nikita050900</a></dd>
+      <dt>ORCID</dt><dd><a href="https://orcid.org/0000-0001-7544-7876">0000-0001-7544-7876</a></dd>
+    </dl>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Nikita Agarwal, September 2026.</span><span><a href="publications.html">Publications</a> · <a href="cv.html">CV</a></span></div></footer>
+<script src="script.js"></script>
 </body>
 </html>
