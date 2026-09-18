@@ -142,3 +142,5 @@ footer a { color: var(--muted); }
 .role-card h3 { font-size: 19px; margin-bottom: 6px; }
 .role-card p { margin: 0; font-size: 15.5px; color: var(--muted); }
 .callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; font-size: 18px; max-width: 62ch; }
+
+.beta { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent2); border: 1px solid var(--accent2); border-radius: 999px; padding: 2px 8px; margin-left: 10px; vertical-align: middle; }
