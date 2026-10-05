@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="nav"><div class="wrap">
-  <a class="brand" href="../index.html">Nikita Agarwal</a><span class="beta" title="This site is a work in progress">beta</span>
+  <a class="brand" href="../index.html">Nikita Agarwal</a>
   <ul>
     <li><a href="../index.html#demo">Demo</a></li>
     <li><a href="../index.html#work">Work</a></li>
@@ -25,6 +25,8 @@
 </div></div>
 
 <main class="wrap">
+  <div class="tldr"><div class="tldr-h">In plain terms</div><ul><li><strong>Problem:</strong> the fast software could not take known information (a galaxy's measured distance) as input, and rewriting its core was not possible before the paper deadline.</li><li><strong>What I did:</strong> applied that information after the run by reweighting the saved results (importance reweighting), so assumptions can change without rerunning the analysis.</li><li><strong>Result:</strong> adopted in the collaboration's published search (ApJ Letters, 2026).</li></ul></div>
+
   <h2>The problem</h2>
   <p>A targeted search asks whether a specific galaxy hosts a signal. We know the galaxy's position and distance from telescope observations, so those should be fixed rather than searched over. The fast sampler we wanted to use does not have distance as a parameter at all: it samples the signal amplitude, and distance only enters through a known relation between amplitude, mass and frequency. Modifying the sampler's core was not an option on the timescale of the collaboration paper.</p>
 
@@ -44,7 +46,7 @@
   <p>This is the general situation where you have expensive posterior samples and a constraint you did not (or could not) build into the model. Rejection by an indicator, reweighting by a smooth window, and posterior binning are all one idea. Knowing that lets you reuse existing chains under new assumptions, and knowing the effective sample size cost lets you say when you should not.</p>
 </main>
 
-<footer><div class="wrap"><span>Nikita Agarwal, September 2026. This site is a beta version and still being built.</span></div></footer>
+<footer><div class="wrap"><span>Nikita Agarwal, September 2026.</span></div></footer>
 <script src="../script.js"></script>
 </body>
 </html>
